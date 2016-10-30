@@ -13,6 +13,8 @@ from .widgets.icon import *
 from .widgets.image import *
 from .widgets.imageview import *
 from .widgets.label import *
+from .widgets.menu import *
+from .widgets.menuitem import *
 from .widgets.multilinetextinput import *
 from .widgets.optioncontainer import *
 from .widgets.passwordinput import *
@@ -38,6 +40,8 @@ __all__ = [
     'ImageView',
     'Font',
     'Label',
+    'Menu',
+    'MenuItem',
     'MultilineTextInput',
     'NumberInput',
     'OptionContainer',

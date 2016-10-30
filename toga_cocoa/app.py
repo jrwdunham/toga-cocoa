@@ -95,6 +95,22 @@ class App(AppInterface):
         appDelegate._interface = self
         self._impl.setDelegate_(appDelegate)
 
+        # Call user code to populate the main window
+        self.startup()
+
+        # Call after startup so that user has access to app.main_window when
+        # creating main menu.
+        self._create_menu()
+
+    def _create_menu(self):
+        try:
+            # User code to create the main menu should call set_main_menu on a
+            # ``toga.Menu`` instance
+            self.create_menu()
+        except AttributeError:
+            self._create_default_menu()
+
+    def _create_default_menu(self):
         app_name = self.name
 
         self.menu = NSMenu.alloc().initWithTitle_('MainMenu')
@@ -128,8 +144,8 @@ class App(AppInterface):
         # Set the menu for the app.
         self._impl.setMainMenu_(self.menu)
 
-        # Call user code to populate the main window
-        self.startup()
+    def set_main_menu(self, main_menu):
+        self._impl.setMainMenu_(main_menu._impl)
 
     def main_loop(self):
         # Stimulate the build of the app
